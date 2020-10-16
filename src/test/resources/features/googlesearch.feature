@@ -6,4 +6,5 @@ Scenario Outline: Google Text Search Test
 	Then I should get results for "<key>"
 	Examples:
 	|key|
+	|key1|
 	|key2|

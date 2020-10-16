@@ -1,5 +1,6 @@
 package com.framework.tests;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 
 import com.framework.listeners.LogListener;
@@ -11,4 +12,9 @@ import io.cucumber.testng.CucumberOptions;
 		"json:reports/cucumber.json", "html:reports/cucumber-report.html" })
 @Listeners(LogListener.class)
 public class ApplicationTest extends AbstractTestNGCucumberTests {
+	@Override
+    @DataProvider(parallel = true)
+    public Object[][] scenarios() {
+        return super.scenarios();
+    }
 }
