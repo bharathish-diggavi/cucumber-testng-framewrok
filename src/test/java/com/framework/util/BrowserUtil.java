@@ -18,10 +18,9 @@ public class BrowserUtil {
 	private static FluentWait<WebDriver> waiter;
 
 	public static FluentWait<WebDriver> getWaiter() {
-		if (waiter == null)
-			waiter = new FluentWait<WebDriver>(WebDriverContext.getDriver())
-					.ignoring(NoSuchElementException.class, WebDriverException.class)
-					.withTimeout(Duration.ofSeconds(10)).pollingEvery(Duration.ofSeconds(2));
+		waiter = new FluentWait<WebDriver>(WebDriverContext.getDriver())
+				.ignoring(NoSuchElementException.class, WebDriverException.class).withTimeout(Duration.ofSeconds(10))
+				.pollingEvery(Duration.ofSeconds(2));
 
 		return waiter;
 
@@ -30,7 +29,7 @@ public class BrowserUtil {
 	public static byte[] takeBase64ScreenShot() {
 		return ((TakesScreenshot) WebDriverContext.getDriver()).getScreenshotAs(OutputType.BYTES);
 	}
-	
+
 	public static void waitUntilVisible(WebElement element) {
 		getWaiter().until(ExpectedConditions.visibilityOf(element));
 	}

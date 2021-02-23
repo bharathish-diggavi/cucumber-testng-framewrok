@@ -5,6 +5,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 /**
  * The Class is responsible in maintaining single instance of webdriver in any
  * given thread.
@@ -51,13 +53,15 @@ public class WebDriverContext {
 
 	public static void createBrowser() {
 		WebDriver driver = null;
-		String browser = TestProperties.getOrDefault("browser", "firefox");
+		String browser = TestProperties.getOrDefault("browser", "Chrome");
 		if ("Chrome".equalsIgnoreCase(browser)) {
-			System.setProperty("webdriver.chrome.driver", Constants.CHROME_DRIVER_PATH);
+//			System.setProperty("webdriver.chrome.driver", Constants.CHROME_DRIVER_PATH);
+			WebDriverManager.chromedriver().setup();
 			ChromeOptions ops = new ChromeOptions();
 			ops.addArguments("disable-infobars");
 			driver = new ChromeDriver(ops);
 		} else {
+			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
 		}
 		WebDriverContext.setDriver(driver);
